@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+	<meta id="redirect" http-equiv="Refresh" content="" />
+	<title>Söpöysnappi</title>
+</head>
+<body>
+	<script>
+		const urls = [
+			"http://youtube.com/"
+		];
+		const url = urls[Math.floor(Math.random() * urls.length)];
+		document.getElementById("redirect").content = "0; url='" + url + "'";
+	</script>
+</body>
+</html>
