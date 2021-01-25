@@ -6,6 +6,7 @@
 	<title>Söpöysnappi</title>
 </head>
 <body>
+	<p id="text"></p>
 	<script>
 		const urls = [
 			"https://youtu.be/1SfjHEUidAs", // Smiling Dogs Compilation
@@ -21,10 +22,48 @@
 			"https://www.instagram.com/p/Bi-G29_AwDK/?utm_source=ig_web_copy_link", // Dog wants to fly
 			"https://www.tiktok.com/@angelasversion/video/6876837829473766662" // Dog and a squeaky toy
 		];
-		const url = urls[Math.floor(Math.random() * urls.length)];
-		//alert(decodeURIComponent(document.cookie));
-		//document.cookie = "url=" + url + "; expires=Mon, 25 Jan 2021 22:00:00 UTC; path=/";
-		/*window.onclick = function() { */document.getElementById("redirect").content = "0; url='" + url + "'";/* };*/
+
+		const cookie = "asdf=yeet;indices=0;fdsa=eyyt";
+		const maxIndices = 3;
+
+		const decodedCk = decodeURIComponent(document.cookie);
+		const indicesStr = decodedCk.substring(decodedCk.indexOf("indices=") + 8).split(";")[0].split(",");
+		const indices = indicesStr[0] === "" ? [] : indicesStr.map(i => parseInt(i));
+
+		console.log("indices before", indices);
+
+		let index, inIndices;
+		do {
+			index = Math.floor(Math.random() * urls.length);
+			inIndices = indices.indexOf(index) !== -1;
+		} while (inIndices);
+
+		const url = urls[index];
+		console.log("selected url: " + url);
+
+
+		indices.push(index);
+		while (indices.length > maxIndices) {
+			indices.splice(0, 1);
+		}
+
+		const date = new Date();
+		date.setTime(date.getTime() + 50*24*60*60*1000);
+		document.cookie = "indices=" + indices + "; expires=" + date.toUTCString() + "; SameSite=Lax; path=/";
+
+		console.log(document.cookie);
+
+		console.log("expires=" + date.toUTCString());
+
+
+		function clearCookie() {
+			const date0 = new Date();
+			date0.setTime(0);
+			document.cookie="indices=; expires=" + date0.toUTCString() + "; SameSite=Lax; path=/";
+		}
+
+		// document.getElementById("redirect").content = "0; url='" + url + "'";
+		document.getElementById("text").innerText = url;
 	</script>
 </body>
 </html>
