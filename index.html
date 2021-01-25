@@ -23,47 +23,35 @@
 			"https://www.tiktok.com/@angelasversion/video/6876837829473766662" // Dog and a squeaky toy
 		];
 
-		const cookie = "asdf=yeet;indices=0;fdsa=eyyt";
 		const maxIndices = 3;
-
+		
+		// Get an array of video indices from the cookie "indices".
 		const decodedCk = decodeURIComponent(document.cookie);
 		const indicesStr = decodedCk.substring(decodedCk.indexOf("indices=") + 8).split(";")[0].split(",");
 		const indices = indicesStr[0] === "" ? [] : indicesStr.map(i => parseInt(i));
-
-		console.log("indices before", indices);
-
+		
+		// Randomize a new index that does not appear in the array "indices".
 		let index, inIndices;
 		do {
 			index = Math.floor(Math.random() * urls.length);
 			inIndices = indices.indexOf(index) !== -1;
 		} while (inIndices);
-
-		const url = urls[index];
-		console.log("selected url: " + url);
-
-
+		
+		// Add the new index to the array "indices" and remove the first index(es) if the array's length exceeds "maxIndices".
+		// Using a while loop to delete all excessive indices in case "maxIndices" is reduced.
 		indices.push(index);
 		while (indices.length > maxIndices) {
 			indices.splice(0, 1);
 		}
-
+		
+		// Update the cookie "indices" with the new indices and a new expiration date.
 		const date = new Date();
-		date.setTime(date.getTime() + 50*24*60*60*1000);
+		date.setTime(date.getTime() + 50*24*60*60*1000); // 50 days in milliseconds
 		document.cookie = "indices=" + indices + "; expires=" + date.toUTCString() + "; SameSite=Lax; path=/";
-
-		console.log(document.cookie);
-
-		console.log("expires=" + date.toUTCString());
-
-
-		function clearCookie() {
-			const date0 = new Date();
-			date0.setTime(0);
-			document.cookie="indices=; expires=" + date0.toUTCString() + "; SameSite=Lax; path=/";
-		}
-
-		// document.getElementById("redirect").content = "0; url='" + url + "'";
-		document.getElementById("text").innerText = url;
+		
+		// Redirect to an URL with the new index
+		const url = urls[index];
+		document.getElementById("redirect").content = "0; url='" + url + "'";
 	</script>
 </body>
 </html>
