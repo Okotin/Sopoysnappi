@@ -44,7 +44,7 @@
 			indices.splice(0, 1);
 		}
 		
-		// Update the cookie "indices" with the new indices and a new expiration date.
+		// Update the cookie "indices" with the new index and a new expiration date.
 		const date = new Date();
 		date.setTime(date.getTime() + 50*24*60*60*1000); // 50 days in milliseconds
 		document.cookie = "indices=" + indices + "; expires=" + date.toUTCString() + "; SameSite=Lax; path=/";
