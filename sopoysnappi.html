@@ -22,8 +22,8 @@
 			"https://www.tiktok.com/@angelasversion/video/6876837829473766662" // Dog and a squeaky toy
 		];
 		const url = urls[Math.floor(Math.random() * urls.length)];
-		alert(decodeURIComponent(document.cookie));
-		document.cookie = "url=" + url + "; expires=Mon, 25 Jan 2021 22:00:00 UTC; path=/";
+	//	alert(decodeURIComponent(document.cookie));
+	//	document.cookie = "url=" + url + "; expires=Mon, 25 Jan 2021 22:00:00 UTC; path=/";
 		window.onclick = function() { document.getElementById("redirect").content = "0; url='" + url + "'"; };
 	</script>
 </body>
