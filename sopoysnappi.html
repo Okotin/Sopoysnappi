@@ -23,7 +23,7 @@
 		const url = urls[Math.floor(Math.random() * urls.length)];
 		alert(decodeURIComponent(document.cookie));
 		document.cookie = "url=" + url + "; expires=Mon, 25 Jan 2021 22:00:00 UTC; path=/";
-		document.getElementById("redirect").content = "0; url='" + url + "'";
+		setTimeout(function() { document.getElementById("redirect").content = "0; url='" + url + "'"; }, 3000);
 	</script>
 </body>
 </html>
