@@ -48,7 +48,7 @@
 		
 		// Update the cookie "indices" with the new index and a new expiration date.
 		const date = new Date();
-		date.setTime(date.getTime() + 50*24*60*60*1000); // 50 days in milliseconds
+		date.setTime(date.getTime() + 3*24*60*60*1000); // 3 days in milliseconds
 		document.cookie = "indices=" + indices + "; expires=" + date.toUTCString() + "; SameSite=Lax; path=/";
 		
 		// Redirect to an URL with the new index
